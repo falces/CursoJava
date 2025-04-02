@@ -46,8 +46,7 @@ public class Dron {
     private static boolean userSelection() throws NotANumber, SelectionNotFound {
         System.out.println("1. Cuadrado");
         System.out.println("2. Rectángulo");
-        System.out.println("99. Salir");
-        System.out.println("¿Qué formas quieres añadir?");
+        System.out.println("¿Qué formas quieres añadir (99 para salir)?");
         Scanner input = new Scanner(System.in);
         if (!input.hasNextInt()) {
             throw new NotANumber(input.nextLine() + " no es una selección válida");
