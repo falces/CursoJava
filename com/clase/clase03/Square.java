@@ -9,7 +9,7 @@ public class Square extends Polygons {
     public Square() {
         this.sides = 4;
         this.questions = new ArrayList<String>();
-        this.questions.add("Dame el lado del círculo");
+        this.questions.add("Dame el lado del cuadrado");
     }
 
     @Override
