@@ -3,7 +3,7 @@ package com.clase.tools;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-class Console {
+public class Console {
 
     private final BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
