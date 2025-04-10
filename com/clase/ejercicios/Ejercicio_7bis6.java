@@ -16,7 +16,7 @@ public class Ejercicio_7bis6 {
                 Months months = new Months();
                 HashMap<Integer, Month> monthData = months.getMonthsData();
                 Month month = monthData.get(selection);
-                System.out.println("El mes seleccionado (" + month.getName() + ") tiene " + month.getNumberOfDays() + " días");
+                System.out.println("El mes seleccionado (" + month.name() + ") tiene " + month.numberOfDays() + " días");
             }
 
         } catch (Exception e) {
@@ -60,23 +60,5 @@ class Months {
     }
 }
 
-class Month {
-    private final String name;
-    private final Integer numberOfDays;
-
-    public Month(
-            String name,
-            Integer numberOfDays
-    ) {
-        this.name = name;
-        this.numberOfDays = numberOfDays;
-    }
-
-    public Integer getNumberOfDays() {
-        return numberOfDays;
-    }
-
-    public String getName() {
-        return name;
-    }
+record Month(String name, Integer numberOfDays) {
 }
