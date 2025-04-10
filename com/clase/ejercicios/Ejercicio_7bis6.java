@@ -3,7 +3,6 @@ package com.clase.ejercicios;
 import com.clase.exceptions.NotANumber;
 import com.clase.exceptions.SelectionNotFound;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -24,7 +23,7 @@ public class Ejercicio_7bis6 {
         }
     }
 
-    private static boolean ask() throws NotANumber, SelectionNotFound, IOException, InterruptedException {
+    private static boolean ask() throws NotANumber, SelectionNotFound {
         System.out.println("Escribe un número de mes (1 - 12, 99 para salir):");
         Scanner input = new Scanner(System.in);
         if(!input.hasNextInt()){
@@ -39,7 +38,7 @@ public class Ejercicio_7bis6 {
 }
 
 class Months {
-    private final HashMap<Integer, Month> months = new HashMap<Integer, Month>();
+    private final HashMap<Integer, Month> months = new HashMap<>();
     public Months() {
         this.months.put(1, new Month("enero", 31));
         this.months.put(2, new Month("febrero", 28));
