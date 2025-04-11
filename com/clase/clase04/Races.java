@@ -5,11 +5,11 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class Races {
-    private static final ArrayList<String> brands = new ArrayList<String>();
+    private static final ArrayList<String> teams = new ArrayList<String>();
     private static Integer numberOfRaces = 0;
     private static Integer numberOfTeams = 0;
     private static ArrayList<Car> race = new ArrayList<>();
-    private static HashMap<String, Integer> results = new HashMap<>();
+    private static final HashMap<String, Integer> results = new HashMap<>();
     private static String winner;
 
     public static void main(String[] args) {
@@ -17,8 +17,9 @@ public class Races {
         askNumberOfTeams();
         askNumberOfRaces();
         for(int i = 1; i <= numberOfRaces; i++){
-            for(int j = 1; j <= numberOfTeams; j++){
-                race.add(new Car(brands.get(j)));
+            race.clear();
+            for(int j = 0; j < numberOfTeams; j++){
+                race.add(new Car(teams.get(j)));
             }
             int previousSpeed = 0;
             for(Car car : race){
@@ -28,7 +29,7 @@ public class Races {
                     previousSpeed = car.getSpeed();
                 }
             }
-            int currentWinnedRaces = (winner != null) ? results.get(winner) : 0;
+            int currentWinnedRaces = results.getOrDefault(winner, 0);
             results.put(winner, ++currentWinnedRaces);
         }
 
@@ -36,16 +37,16 @@ public class Races {
     }
 
     private static void addTeams(){
-        brands.add("Aston Martin");
-        brands.add("Ferrari");
-        brands.add("McLaren");
-        brands.add("Red Bull");
-        brands.add("Williams");
-        brands.add("Mercedes");
-        brands.add("Racing Bulls");
-        brands.add("Haas");
-        brands.add("Alpine");
-        brands.add("Sauber");
+        teams.add("Aston Martin");
+        teams.add("Ferrari");
+        teams.add("McLaren");
+        teams.add("Red Bull");
+        teams.add("Williams");
+        teams.add("Mercedes");
+        teams.add("Racing Bulls");
+        teams.add("Haas");
+        teams.add("Alpine");
+        teams.add("Sauber");
     }
 
     private static void askNumberOfTeams() {
