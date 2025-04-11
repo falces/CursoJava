@@ -20,33 +20,8 @@ public class Races {
             addTeams();
             askNumberOfTeams();
             askNumberOfRaces();
-            for(int i = 1; i <= numberOfRaces; i++){
-                race.clear();
-                for(int j = 0; j < numberOfTeams; j++){
-                    race.add(new Car(teams.get(j)));
-                }
-                int previousSpeed = 0;
-                for(Car car : race){
-                    int currentSpeed = car.getSpeed();
-                    if (currentSpeed > previousSpeed) {
-                        winner = car.getBrand();
-                        previousSpeed = car.getSpeed();
-                    }
-                }
-                int currentWinnedRaces = results.getOrDefault(winner, 0);
-                results.put(winner, ++currentWinnedRaces);
-            }
-
-            teams.forEach(
-                (t) ->
-                    {
-                        int wonRaces = (results.get(t) != null ? results.get(t) : 0);
-                        if(wonRaces != 0) {
-                            System.out.println(
-                                t + " ha ganado " + wonRaces + " carreras " + ((wonRaces) * 100) / numberOfRaces + "%");
-                        }
-                    }
-            );
+            manageRace();
+            printResults();
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
@@ -97,5 +72,37 @@ public class Races {
             System.out.println(e.getMessage());
             askNumberOfRaces();
         }
+    }
+
+    private static void manageRace(){
+        for(int i = 1; i <= numberOfRaces; i++){
+            race.clear();
+            for(int j = 0; j < numberOfTeams; j++){
+                race.add(new Car(teams.get(j)));
+            }
+            int previousSpeed = 0;
+            for(Car car : race){
+                int currentSpeed = car.getSpeed();
+                if (currentSpeed > previousSpeed) {
+                    winner = car.getBrand();
+                    previousSpeed = car.getSpeed();
+                }
+            }
+            int currentWinnedRaces = results.getOrDefault(winner, 0);
+            results.put(winner, ++currentWinnedRaces);
+        }
+    }
+
+    private static void printResults(){
+        teams.forEach(
+                (t) ->
+                {
+                    int wonRaces = (results.get(t) != null ? results.get(t) : 0);
+                    if(wonRaces != 0) {
+                        System.out.println(
+                                t + " ha ganado " + wonRaces + " carreras " + ((wonRaces) * 100) / numberOfRaces + "%");
+                    }
+                }
+        );
     }
 }
