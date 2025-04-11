@@ -38,10 +38,14 @@ public class Races {
             }
 
             teams.forEach(
-                    (t) ->
+                (t) ->
+                    {
+                        int wonRaces = (results.get(t) != null ? results.get(t) : 0);
+                        if(wonRaces != 0) {
                             System.out.println(
-                                    t + " ha ganado " + (results.get(t) != null ? results.get(t) : 0) + " carreras"
-                            )
+                                t + " ha ganado " + wonRaces + " carreras " + ((wonRaces) * 100) / numberOfRaces + "%");
+                        }
+                    }
             );
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
