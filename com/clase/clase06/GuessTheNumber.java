@@ -30,7 +30,7 @@ public class GuessTheNumber {
 
     private static void guessByHalf(){
         Random random = new Random();
-        while(!checkNumberIsCorrect(myNumber)){
+        while(checkNumberIsNotCorrect(myNumber)){
             halfNumberOfTries++;
             if (halfMaximum - halfMinimum == 0){
                 myNumber = halfMaximum;
@@ -56,13 +56,13 @@ public class GuessTheNumber {
         return guessNumber < number;
     }
 
-    private static boolean checkNumberIsCorrect (int guessNumber){
-        return guessNumber == number;
+    private static boolean checkNumberIsNotCorrect(int guessNumber){
+        return guessNumber != number;
     }
 
     private static void guessByRand(){
         Random random = new Random();
-        while(!checkNumberIsCorrect(myNumber)){
+        while(checkNumberIsNotCorrect(myNumber)){
             randomNumberOfTries++;
             myNumber = random.nextInt((randMaximum - randMinimum) + 1) + randMinimum;
             if(checkNumberIsLower(myNumber)){
