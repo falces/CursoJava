@@ -16,10 +16,9 @@ public class Races {
         addTeams();
         askNumberOfTeams();
         askNumberOfRaces();
+        setResults();
         for(int i = 1; i <= numberOfRaces; i++){
-            for(int j = 1; j <= numberOfTeams; j++){
-                race.add(new Car(brands.get(j)));
-            }
+            setRace();
             int previousSpeed = 0;
             for(Car car : race){
                 int currentSpeed = car.getSpeed();
@@ -28,7 +27,7 @@ public class Races {
                     previousSpeed = car.getSpeed();
                 }
             }
-            int currentWonRaces = (winner != null) ? results.get(winner) : 0;
+            int currentWonRaces = results.get(winner);
             results.put(winner, ++currentWonRaces);
         }
 
@@ -58,5 +57,18 @@ public class Races {
         System.out.println("¿Cuántas carreras quieres disputar?");
         Scanner input = new Scanner(System.in);
         numberOfRaces = input.nextInt();
+    }
+
+    private static void setResults(){
+        for(int j = 0; j < numberOfTeams; j++){
+            results.put(brands.get(j), 0);
+        }
+    }
+
+    private static void setRace(){
+        race.clear();
+        for(int j = 0; j < numberOfTeams; j++){
+            race.add(new Car(brands.get(j)));
+        }
     }
 }
