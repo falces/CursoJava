@@ -2,10 +2,11 @@ package com.clase.clase04;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Races {
-    private static final ArrayList<String> brands = new ArrayList<>();
+    private static final ArrayList<String> brandsInRace = new ArrayList<>();
     private static Integer numberOfRaces = 0;
     private static Integer numberOfTeams = 0;
     private static final ArrayList<Car> race = new ArrayList<>();
@@ -14,8 +15,8 @@ public class Races {
 
     public static void main(String[] args) {
         try{
-            addTeams();
             askNumberOfTeams();
+            addTeams();
             askNumberOfRaces();
             setResults();
             for(int i = 1; i <= numberOfRaces; i++){
@@ -38,6 +39,7 @@ public class Races {
     }
 
     private static void addTeams(){
+        ArrayList<String> brands = new ArrayList<>();
         brands.add("Aston Martin");
         brands.add("Ferrari");
         brands.add("McLaren");
@@ -48,6 +50,18 @@ public class Races {
         brands.add("Haas");
         brands.add("Alpine");
         brands.add("Sauber");
+
+        Random random = new Random();
+
+        while(brandsInRace.size() < numberOfTeams) {
+            int index = random.nextInt((10 - 1) + 1);
+            String brand = brands.get(index);
+            if (!brandsInRace.contains(brand)) {
+                brandsInRace.add(brand);
+            } else {
+                addTeams();
+            }
+        }
     }
 
     private static void askNumberOfTeams() {
@@ -72,14 +86,14 @@ public class Races {
 
     private static void setResults(){
         for(int j = 0; j < numberOfTeams; j++){
-            results.put(brands.get(j), 0);
+            results.put(brandsInRace.get(j), 0);
         }
     }
 
     private static void setRace(){
         race.clear();
         for(int j = 0; j < numberOfTeams; j++){
-            race.add(new Car(brands.get(j)));
+            race.add(new Car(brandsInRace.get(j)));
         }
     }
 
