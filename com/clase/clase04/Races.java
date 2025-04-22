@@ -5,11 +5,11 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class Races {
-    private static final ArrayList<String> brands = new ArrayList<String>();
+    private static final ArrayList<String> brands = new ArrayList<>();
     private static Integer numberOfRaces = 0;
     private static Integer numberOfTeams = 0;
-    private static ArrayList<Car> race = new ArrayList<>();
-    private static HashMap<String, Integer> results = new HashMap<>();
+    private static final ArrayList<Car> race = new ArrayList<>();
+    private static final HashMap<String, Integer> results = new HashMap<>();
     private static String winner;
 
     public static void main(String[] args) {
@@ -28,8 +28,8 @@ public class Races {
                     previousSpeed = car.getSpeed();
                 }
             }
-            int currentWinnedRaces = (winner != null) ? results.get(winner) : 0;
-            results.put(winner, ++currentWinnedRaces);
+            int currentWonRaces = (winner != null) ? results.get(winner) : 0;
+            results.put(winner, ++currentWonRaces);
         }
 
         System.out.println(results);
