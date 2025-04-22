@@ -1,5 +1,8 @@
 package com.clase.clase04;
 
+import com.clase.exceptions.NotANumber;
+import com.clase.exceptions.SelectionNotFound;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
@@ -65,21 +68,35 @@ public class Races {
     }
 
     private static void askNumberOfTeams() {
-        System.out.println("¿Cuántos equipos quieres usar (2 - 10)?");
-        Scanner input = new Scanner(System.in);
-        numberOfTeams = input.nextInt();
-        if (numberOfTeams < 2 || numberOfTeams > 10){
-            System.out.println("El número de equipos debe ser entre 2 y 10");
+        try {
+            System.out.println("¿Cuántos equipos quieres usar (2 - 10)?");
+            Scanner input = new Scanner(System.in);
+            if(!input.hasNextInt()){
+                throw new NotANumber(input.nextLine() + " no es un número.");
+            }
+            numberOfTeams = input.nextInt();
+            if (numberOfTeams < 2 || numberOfTeams > 10){
+                throw new SelectionNotFound("El número de equipos debe ser entre 2 y 10");
+            }
+        } catch (NotANumber | SelectionNotFound e) {
+            System.out.println(e.getMessage());
             askNumberOfTeams();
         }
     }
 
-    private static void askNumberOfRaces(){
-        System.out.println("¿Cuántas carreras quieres disputar (1 - 1.000.000)?");
-        Scanner input = new Scanner(System.in);
-        numberOfRaces = input.nextInt();
-        if (numberOfRaces < 1 || numberOfTeams > 100000){
-            System.out.println("El número de carreras debe estar entre 1 y 1.000.000");
+    private static void askNumberOfRaces() throws NotANumber {
+        try {
+            System.out.println("¿Cuántas carreras quieres disputar (1 - 1.000.000)?");
+            Scanner input = new Scanner(System.in);
+            if(!input.hasNextInt()){
+                throw new NotANumber(input.nextLine() + " no es un número");
+            }
+            numberOfRaces = input.nextInt();
+            if (numberOfRaces < 1 || numberOfTeams > 100000){
+                throw new SelectionNotFound("El número de carreras debe estar entre 1 y 1.000.000");
+            }
+        } catch (NotANumber | SelectionNotFound e) {
+            System.out.println(e.getMessage());
             askNumberOfRaces();
         }
     }
