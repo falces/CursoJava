@@ -21,20 +21,8 @@ public class Races {
             askNumberOfTeams();
             addTeams();
             askNumberOfRaces();
-            setResults();
-            for(int i = 1; i <= numberOfRaces; i++){
-                setRace();
-                int previousSpeed = 0;
-                for(Car car : race){
-                    int currentSpeed = car.getSpeed();
-                    if (currentSpeed > previousSpeed) {
-                        winner = car.getBrand();
-                        previousSpeed = car.getSpeed();
-                    }
-                }
-                int currentWonRaces = results.get(winner);
-                results.put(winner, ++currentWonRaces);
-            }
+            setResultsToZero();
+            executeRace();
             printResults();
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
@@ -101,7 +89,7 @@ public class Races {
         }
     }
 
-    private static void setResults(){
+    private static void setResultsToZero(){
         for(int j = 0; j < numberOfTeams; j++){
             results.put(brandsInRace.get(j), 0);
         }
@@ -119,6 +107,22 @@ public class Races {
             int numberOfVictories = results.get(brand);
             double percentage = (double)(100 * numberOfVictories) / numberOfRaces;
             System.out.println(brand + ": " + results.get(brand) + " victorias (" + percentage + "%)");
+        }
+    }
+
+    private static void executeRace(){
+        for(int i = 1; i <= numberOfRaces; i++){
+            setRace();
+            int previousSpeed = 0;
+            for(Car car : race){
+                int currentSpeed = car.getSpeed();
+                if (currentSpeed > previousSpeed) {
+                    winner = car.getBrand();
+                    previousSpeed = car.getSpeed();
+                }
+            }
+            int currentWonRaces = results.get(winner);
+            results.put(winner, ++currentWonRaces);
         }
     }
 }
