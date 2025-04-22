@@ -19,13 +19,17 @@ public class GuessTheNumber {
     static int myNumber = 0;
 
     public static void main(String[] args) {
-        askInterval();
-        askNumber();
-        guessByRand();
-        System.out.println("Intentos de forma aleatoria: " + randomNumberOfTries);
-        myNumber = 0;
-        guessByHalf();
-        System.out.println("Intentos a punto medio: " + halfNumberOfTries);
+        try{
+            askInterval();
+            askNumber();
+            guessByRand();
+            System.out.println("Intentos de forma aleatoria: " + randomNumberOfTries);
+            myNumber = 0;
+            guessByHalf();
+            System.out.println("Intentos a punto medio: " + halfNumberOfTries);
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage() + " en " + e.getStackTrace()[0].getFileName() + " en la línea " + e.getStackTrace()[0].getLineNumber());
+        }
     }
 
     private static void guessByHalf(){
