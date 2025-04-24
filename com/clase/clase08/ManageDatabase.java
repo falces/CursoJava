@@ -1,13 +1,16 @@
 package com.clase.clase08;
 
 import com.clase.exceptions.QueryTypeNotFound;
+import com.clase.tools.DotEnvReader;
 
+import java.io.FileNotFoundException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
 public class ManageDatabase {
+
     private Statement statement;
     private Connection connection;
     private final String SELECT = "SELECT";
@@ -25,11 +28,19 @@ public class ManageDatabase {
         }
     }
 
-    private void openConnection() throws ClassNotFoundException, SQLException {
+    private void openConnection() throws ClassNotFoundException, SQLException, FileNotFoundException {
+        DotEnvReader dotEnvReader = new DotEnvReader("dev");
         Class.forName("com.mysql.cj.jdbc.Driver");
-        String url = "jdbc:mysql://localhost:8306/testdb?autoReconnect=true&useSSL=false";
-        String username = "root";
-        String password = "rootpassword";
+        // Crea un string de conexión: "jdbc:mysql://localhost:8306/testdb?autoReconnect=true&useSSL=false"
+        String url = "jdbc:mysql://"
+            + dotEnvReader.getEnvironmentVariable("SERVER")
+            + ":"
+            + dotEnvReader.getEnvironmentVariable("PORT")
+            + "/"
+            + dotEnvReader.getEnvironmentVariable("DATABASE")
+            + "?autoReconnect=true&useSSL=false";
+        String username = dotEnvReader.getEnvironmentVariable("USER");
+        String password = dotEnvReader.getEnvironmentVariable("PASSWORD");
         this.connection = DriverManager.getConnection(url, username, password);
     }
 
@@ -60,4 +71,5 @@ public class ManageDatabase {
         this.statement.close();
         return result;
     }
+
 }

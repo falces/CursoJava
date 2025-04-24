@@ -5,12 +5,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Database {
-    Connection connection;
 
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
         try {
-            ManageDatabase eq = new ManageDatabase();
-            ArrayList<HashMap<String, String>> result = eq.selectData("SELECT name, email FROM users");
+            ManageDatabase manageDatabase = new ManageDatabase();
+            ArrayList<HashMap<String, String>> result = manageDatabase.selectData("SELECT name, phone FROM users");
             for(HashMap<String, String> row : result){
                 row.keySet().forEach(
                     key -> System.out.println(key.toUpperCase() + ": " + row.get(key))
@@ -21,9 +20,7 @@ public class Database {
         }
     }
 
-
 }
-
 
 /*
 CREATE TABLE testdb.users (
